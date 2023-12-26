@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<div id="home-container">
+  <section id="feed-post">
+    <h4>Posts</h4>
+    <% if(locals.user){ %>
+    <form action="/posts/create-post" id="new-post-form" method="POST">
+      <textarea name="content" cols="30" rows="5" placeholder="What's on your mind ?" required></textarea>
+      <input type="submit" value="Post">
+    </form>
+    <% } %>
+  
+    <div id="post-list-container">
+      <ul>
+  
+          <% for(post of posts){ %>
+            <%- include('_post') -%>
+        <% } %>
+  
+      </ul>
+    </div>
+  </section>
+  
+
+  <br>
+  
+  <div id="group-list">
+    <div >
+      <section id="My-Friends">
+        <!-- <%- JSON.stringify(all_friends) %> -->
+        <h4>My Friends</h4>
+        
+        <!-- <%- include('_friends') -%> -->
+
+        
+       </section>
+    </div>
+ 
+
+    <div >
+    <section id="User-Session">
+      <h4>Users</h4>
+      <% for(u of all_users){ %>
+
+        <p>
+          <a href="/users/profile/<%=u.id%>"><%=u.name%></a>
+        </p>
+          
+        <% } %>
+    
+    </section>
+  </div>
+</div>
+  
+    
+  <%- include('_chat_box') -%>
+
+    
+    
+
+ 
+  <br>
+  <br>
+ 
+  
+  
+</div>
+
+<script src="/js/home_post.js"></script>
+<script src="/js/toggle_likes.js"></script>
+
+<!-- <script src="/js/toggle_friends.js"></script> -->
+
+<script>
+  $('.toggle-like-button').each(function(){
+      let self = this;
+      let toggleLike = new ToggleLike(self);
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+<% if(locals.user) { %>
+    <script>
+      new ChatEngine('user-chat-box','<%=locals.user.email%>','<%=locals.user.name%>')
+   </script>
+<% } %>

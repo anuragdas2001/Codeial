@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/user.css" />
+
+<img src="<%=user.avatar%>" alt="<%=user.name%>" width="100">
+
+<!-- if user matches then show the form  -->
+<%if(user.id == profile_user.id){%> 
+    
+    <form action="/users/Update/<%=profile_user.id%>" enctype="multipart/form-data" method="POST">
+        <input type="text" name="name" placeholder="Your Name" value="<%=profile_user.name%>" required>
+        <input type="email" name="email" placeholder="Your Email" value="<%=profile_user.email%>" required>
+        <input type="file" name="avatar" placeholder="Profile Picture">
+        <button type="submit" value="<%=profile_user.id%>">Update</button>
+    </form>
+    
+
+
+<!-- else only show the profile info -->
+<%}else{%>
+
+    <p><%=profile_user.name%></p>
+    <p><%=profile_user.email%></p>
+     
+    <small>
+        <form action="/friends/addfriend/<%=profile_user.id%>" method="POST">
+            <input type="submit" value="Add">
+        </form>
+        <!-- <a href="/friends/addfriend/<%=profile_user.id%>">Add</a> -->
+    </small>
+<%}%> 
+
+<script src="/js/toggle_friends.js">
