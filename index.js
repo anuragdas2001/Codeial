@@ -20,10 +20,33 @@ const flash = require('connect-flash');
 const customMWare = require('./config/middleware');
 //Setup the chat Server to be used with Socket.io
 const cors = require('cors');
-const chatServer = require('http').Server(app);
-const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
-chatServer.listen(5000);
-console.log('Chat Server is listening on port 5000');
+// const chatServer = require('http').Server(app);
+// const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+
+// CORS configuration
+// const corsOptions = {
+//     origin: 'http://51.20.121.166:8000', // Replace with the actual origin of your client application
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     credentials: true,
+//     optionsSuccessStatus: 204
+// };
+// app.use(cors(corsOptions));
+
+const chatServer = require('http').createServer(app);
+const options = {
+    cors: {
+        origin: "http://51.20.121.166",
+        methods: ["GET", "POST"]
+      }
+};
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer, options);
+chatServer.listen(5000, function(){
+    console.log('chat server is listening on port 5000');
+});
+
+
+// chatServer.listen(5000);
+// console.log('Chat Server is listening on port 5000');
 app.use(cors());
 app.use(express.urlencoded());
 

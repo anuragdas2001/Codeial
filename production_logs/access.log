@@ -1,5 +1,2 @@
-[0mGET / [36m302[0m 44.458 ms - 72[0m
-[0mGET /users/sign-in [36m304[0m 16.785 ms - -[0m
-[0mGET /favicon.ico [33m404[0m 2.855 ms - 150[0m
-[0mGET / [36m302[0m 98.378 ms - 72[0m
-[0mGET /users/sign-in [36m304[0m 16.491 ms - -[0m
+[0mGET / [36m302[0m 49.067 ms - 72[0m
+[0mGET /users/sign-in [36m304[0m 13.139 ms - -[0m
